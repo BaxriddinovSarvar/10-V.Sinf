@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-V Sinf | 5-Maktab Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="main-header">
+    <div class="container header-flex">
+        <div class="logo-area">
+            <img src="./images/logo.png.png" alt="Logo" class="site-logo">
+            <div class="logo-text">
+                <span>5-MAKTAB</span>
+                <small>10-V sinf &nbsp;·&nbsp; Uchqo'rg'on</small>
+            </div>
+        </div>
+        <nav class="nav">
+            <a href="#about">Sinfimiz</a>
+            <a href="#teacher">Rahbar</a>
+            <a href="#students">Sinfdoshlar</a>
+            <a href="#gallery">Galereya</a>
+            <a href="#discussion">Muloqot</a>
+            <a href="https://instagram.com/10.V_class.0" target="_blank" class="insta-nav">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <button id="dark-mode-toggle" title="Tema o'zgartirish">
+                <i class="fas fa-sun"></i>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="container" data-aos="fade-up">
+        <div class="hero-inner">
+            <div class="hero-left">
+                <div class="hero-tag">Uchqo'rg'on tumani · 5-Maktab</div>
+                <h1>10&#8209;<em>V</em><br>Sinf</h1>
+                <div class="hero-divider"></div>
+                <p class="hero-sub">
+                    Bir tanu bir jon bo'lgan ahil sinfimizning<br>rasmiy portfolio sahifasi
+                </p>
+                <div class="hero-btns">
+                    <a href="#students" class="btn-amber">Sinfdoshlar →</a>
+                    <a href="#gallery" class="btn-ghost">Galereya</a>
+                </div>
+            </div>
+            <div class="hero-stats" data-aos="fade-left" data-aos-delay="200">
+                <div class="stat-item">
+                    <div class="stat-num">32</div>
+                    <div class="stat-label">O'quvchi</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">1</div>
+                    <div class="stat-label">Rahbar</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">'26</div>
+                    <div class="stat-label">Yil</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section container" data-aos="fade-up">
+    <div class="section-header center">
+        <div class="section-label">Biz haqimizda</div>
+        <h2 class="title">Bizning <span>Sinfimiz</span></h2>
+        <div class="line"></div>
+    </div>
+    <div class="about-card">
+        <p>
+            Uchqo'rg'on tumanidagi <strong>5-maktabning 10-V sinfi</strong> — bu nafaqat o'quvchilar
+            jamoasi, balki bir tanu bir jon bo'lgan ahil oila. Biz birga o'rganamiz, birga
+            o'samiz va har qadamda bir-birimizga tayanamiz.
+        </p>
+    </div>
+</section>
+
+<!-- ===== TEACHER ===== -->
+<section id="teacher" class="section container" data-aos="fade-up">
+    <div class="section-header">
+        <div class="section-label">Sinf rahbari</div>
+        <h2 class="title">Ustozimiz</h2>
+        <div class="line"></div>
+    </div>
+    <div class="teacher-card">
+        <div class="t-img">
+            <img src="./images/snfrahbar.png" alt="Ziyadinov Arsen">
+        </div>
+        <div class="t-info">
+            <div class="t-role">Sinf Rahbari</div>
+            <h3>Ziyadinov Arsen</h3>
+            <p>
+                Bizning sinf rahbar — har bir masalada suyanchig'imiz bo'lgan
+                mehribon va bilimdon ustozimiz. Uning yo'l-yo'rig'i bilan
+                biz har kuni yangi cho'qqilarga intilamiz.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== STUDENTS ===== -->
+<section id="students" class="section container">
+    <div class="section-header center" data-aos="fade-up">
+        <div class="section-label">Jamoamiz</div>
+        <h2 class="title">Sinf<span>doshlarimiz</span></h2>
+        <div class="line"></div>
+    </div>
+    <div class="students-grid">
+
+        <div class="st-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="st-card-img">
+                <span class="st-num">1</span>
+                <img src="./images/me.jpg" alt="Sanjar">
+            </div>
+            <div class="st-bio">
+                <h4>Baxriddinov Sanjar</h4>
+                <p>Dasturchi · Sayt yaratuvchisi</p>
+            </div>
+        </div>
+
+        <!--
+            Keyingi o'quvchilarni qo'shish uchun shu blokni ko'paytiring:
+
+            <div class="st-card" data-aos="fade-up" data-aos-delay="60">
+                <div class="st-card-img">
+                    <span class="st-num">2</span>
+                    <img src="./images/ism.jpg" alt="Ism">
+                </div>
+                <div class="st-bio">
+                    <h4>Familiya Ism</h4>
+                    <p>Qiziqishi</p>
+                </div>
+            </div>
+        -->
+
+    </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery" class="section container">
+    <div class="section-header center" data-aos="fade-up">
+        <div class="section-label">Suratlar</div>
+        <h2 class="title">Xotira<span>larimiz</span></h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="filters" data-aos="fade-up">
+        <button class="f-btn active" data-filter="all">Hammasi</button>
+        <button class="f-btn" data-filter="qizlar">Qizlar</button>
+        <button class="f-btn" data-filter="bollar">Bollar</button>
+        <button class="f-btn" data-filter="iftorlik">Iftorlik</button>
+        <button class="f-btn" data-filter="dars">Dars</button>
+    </div>
+
+    <!-- MASONRY — 15 ta rasm -->
+    <div class="gallery-masonry" id="galleryGrid">
+
+        <div class="g-item qizlar" data-aos="fade-up">
+            <a href="./images/qizlar.jpg" data-fancybox="gallery" data-caption="Qizlarimiz">
+                <img src="./images/qizlar.jpg" alt="Qizlar 1" loading="lazy">
+                <div class="g-overlay"><span>Qizlar</span></div>
+            </a>
+        </div>
+
+        <div class="g-item bollar" data-aos="fade-up" data-aos-delay="50">
+            <a href="./images/eski.jpg" data-fancybox="gallery" data-caption="Sinfdoshlar">
+                <img src="./images/eski.jpg" alt="Sinfdoshlar" loading="lazy">
+                <div class="g-overlay"><span>Sinfdoshlar</span></div>
+            </a>
+        </div>
+
+        <div class="g-item qizlar" data-aos="fade-up" data-aos-delay="70">
+            <a href="./images/qizlar1.jpg" data-fancybox="gallery" data-caption="Qizlar 2">
+                <img src="./images/qizlar1.jpg" alt="Qizlar 2" loading="lazy">
+                <div class="g-overlay"><span>Qizlar</span></div>
+            </a>
+        </div>
+
+        <div class="g-item iftorlik" data-aos="fade-up" data-aos-delay="90">
+            <a href="./images/iftrolik1.jpg" data-fancybox="gallery" data-caption="Iftorlik">
+                <img src="./images/iftrolik1.jpg" alt="Iftorlik 1" loading="lazy">
+                <div class="g-overlay"><span>Iftorlik</span></div>
+            </a>
+        </div>
+
+        <div class="g-item bollar" data-aos="fade-up" data-aos-delay="110">
+            <a href="./images/bollar.png" data-fancybox="gallery" data-caption="Bollar">
+                <img src="./images/bollar.png" alt="Bollar" loading="lazy">
+                <div class="g-overlay"><span>Bollar</span></div>
+            </a>
+        </div>
+
+        <!-- 6–15: o'z rasmlaringiz nomini yozing -->
+        <div class="g-item iftorlik" data-aos="fade-up" data-aos-delay="50">
+            <a href="./images/iftorlik.jpg" data-fancybox="gallery" data-caption="Iftorlik 2">
+                <img src="./images/iftorlik.jpg" alt="Iftorlik 2" loading="lazy">
+                <div class="g-overlay"><span>Iftorlik</span></div>
+            </a>
+        </div>
+
+        <div class="g-item dars" data-aos="fade-up" data-aos-delay="70">
+            <a href="./images/diplom.png" data-fancybox="gallery" data-caption="dars 1">
+                <img src="./images/diplom.png" alt="Dars 1" loading="lazy">
+                <div class="g-overlay"><span>Dars</span></div>
+            </a>
+        </div>
+
+        <div class="g-item hammasi" data-aos="fade-up" data-aos-delay="90">
+            <a href="./images/hamma.jpg" data-fancybox="gallery" data-caption="hamma">
+                <img src="./images/hamma.jpg" alt="Bollar 2" loading="lazy">
+                <div class="g-overlay"><span>Sinfdoshlar</span></div>
+            </a>
+        </div>
+
+        <div class="g-item hammasi" data-aos="fade-up" data-aos-delay="50">
+            <a href="./images/hamma1.jpg" data-fancybox="gallery" data-caption="Qizlar 3">
+                <img src="./images/hamma1.jpg" alt="Qizlar 3" loading="lazy">
+                <div class="g-overlay"><span>Sinfdoshlar</span></div>
+            </a>
+        </div>
+
+        <div class="g-item dars" data-aos="fade-up" data-aos-delay="70">
+            <a href="./images/dars2.jpg" data-fancybox="gallery" data-caption="Dars 2">
+                <img src="./images/dars2.jpg" alt="Dars 2" loading="lazy">
+                <div class="g-overlay"><span>Dars</span></div>
+            </a>
+        </div>
+
+        <div class="g-item iftorlik" data-aos="fade-up" data-aos-delay="90">
+            <a href="./images/iftorlik3.jpg" data-fancybox="gallery" data-caption="Iftorlik 3">
+                <img src="./images/iftorlik3.jpg" alt="Iftorlik 3" loading="lazy">
+                <div class="g-overlay"><span>Iftorlik</span></div>
+            </a>
+        </div>
+
+        <div class="g-item bollar" data-aos="fade-up" data-aos-delay="50">
+            <a href="./images/bollar3.jpg" data-fancybox="gallery" data-caption="Bollar 3">
+                <img src="./images/bollar3.jpg" alt="Bollar 3" loading="lazy">
+                <div class="g-overlay"><span>Bollar</span></div>
+            </a>
+        </div>
+
+        <div class="g-item qizlar" data-aos="fade-up" data-aos-delay="70">
+            <a href="./images/qizlar3.jpg" data-fancybox="gallery" data-caption="Qizlar 4">
+                <img src="./images/qizlar3.jpg" alt="Qizlar 4" loading="lazy">
+                <div class="g-overlay"><span>Qizlar</span></div>
+            </a>
+        </div>
+
+        <div class="g-item dars" data-aos="fade-up" data-aos-delay="90">
+            <a href="./images/dars3.jpg" data-fancybox="gallery" data-caption="Dars 3">
+                <img src="./images/dars3.jpg" alt="Dars 3" loading="lazy">
+                <div class="g-overlay"><span>Eski rasmlar</span></div>
+            </a>
+        </div>
+
+        <div class="g-item iftorlik" data-aos="fade-up" data-aos-delay="110">
+            <a href="./images/iftorlik4.jpg" data-fancybox="gallery" data-caption="Iftorlik 4">
+                <img src="./images/iftorlik4.jpg" alt="Iftorlik 4" loading="lazy">
+                <div class="g-overlay"><span>Iftorlik</span></div>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== DISCUSSION ===== -->
+<section id="discussion" class="section container" data-aos="fade-up">
+    <div class="section-header center">
+        <div class="section-label">Muloqot</div>
+        <h2 class="title">Sinfdoshlar <span>Chati</span></h2>
+        <div class="line"></div>
+    </div>
+    <div class="about-card">
+        <p>Ismingizni kiriting va sinfdoshlaringizga xabar qoldiring!</p>
+        <div class="sinf-chat-wrap">
+            <div class="sinf-chat-box">
+                <div class="sinf-chat-header">
+                    <div class="sinf-chat-header-dot"></div>
+                    <h3>Jonli chat</h3>
+                    <div class="sinf-online-badge">● Online</div>
+                </div>
+                <div class="sinf-msgs" id="sinf-msgs">
+                    <div class="sinf-empty">Hozircha xabar yo'q. Birinchi bo'lib yozing! ✨</div>
+                </div>
+                <div class="sinf-input-row">
+                    <input class="sinf-name-inp" id="sinf-name" type="text"
+                        placeholder="Ismingiz" maxlength="20" autocomplete="nickname">
+                    <textarea class="sinf-msg-inp" id="sinf-msg"
+                        placeholder="Xabar yozing... (Enter = yuborish)"
+                        rows="1" maxlength="500"></textarea>
+                    <button class="sinf-send-btn" id="sinf-send" title="Yuborish">
+                        <svg viewBox="0 0 24 24">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>© 2026 &nbsp;<span>10-V Sinf</span>&nbsp; · &nbsp;5-Maktab, Uchqo'rg'on &nbsp;·&nbsp; Tuzuvchi: <span>Sanjar Baxriddinov</span></p>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+<script>
+// 1. AOS
+AOS.init({ duration: 800, once: true, offset: 50 });
+
+// 2. Fancybox
+document.addEventListener("DOMContentLoaded", () => {
+    Fancybox.defaults.Hash = false;
+    setTimeout(() => Fancybox.close(), 10);
+});
+Fancybox.bind("[data-fancybox]", {
+    Carousel: { infinite: false },
+    Hash: false,
+    autoFocus: false
+});
+
+// 3. Dark / Light toggle
+const toggleBtn = document.getElementById('dark-mode-toggle');
+const tIcon = toggleBtn.querySelector('i');
+
+if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light-mode');
+    tIcon.classList.replace('fa-sun', 'fa-moon');
+}
+
+toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    tIcon.classList.replace(
+        isLight ? 'fa-sun' : 'fa-moon',
+        isLight ? 'fa-moon' : 'fa-sun'
+    );
+});
+
+// 4. Gallery filter
+document.querySelectorAll('.f-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelector('.f-btn.active')?.classList.remove('active');
+        btn.classList.add('active');
+        const cat = btn.dataset.filter;
+        document.querySelectorAll('.g-item').forEach(item => {
+            item.style.display = (cat === 'all' || item.classList.contains(cat)) ? '' : 'none';
+        });
+        AOS.refresh();
+    });
+});
+
+// 5. Chat
+(function () {
+    const STORE = 'sinf10v_chat_v1';
+    const NKEY  = 'sinf10v_myname';
+    const msgsEl  = document.getElementById('sinf-msgs');
+    const nameInp = document.getElementById('sinf-name');
+    const msgInp  = document.getElementById('sinf-msg');
+    const sendBtn = document.getElementById('sinf-send');
+
+    nameInp.value = localStorage.getItem(NKEY) || '';
+
+    function get() {
+        try { return JSON.parse(localStorage.getItem(STORE) || '[]'); }
+        catch { return []; }
+    }
+    function save(a) { localStorage.setItem(STORE, JSON.stringify(a.slice(-300))); }
+    function esc(s)  { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function t(ts) {
+        const d = new Date(ts);
+        return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+    }
+
+    function render() {
+        const arr = get();
+        const me  = (nameInp.value || '').trim();
+        const atBottom = msgsEl.scrollHeight - msgsEl.scrollTop - msgsEl.clientHeight < 50;
+        msgsEl.innerHTML = '';
+        if (!arr.length) {
+            msgsEl.innerHTML = '<div class="sinf-empty">Hozircha xabar yo\'q. Birinchi bo\'lib yozing! ✨</div>';
+            return;
+        }
+        arr.forEach(m => {
+            const isMe = me && m.name === me;
+            const d = document.createElement('div');
+            d.className = 'sinf-msg ' + (isMe ? 'me' : 'other');
+            d.innerHTML =
+                '<div class="sinf-msg-name">' + esc(m.name) + '</div>' +
+                '<div class="sinf-msg-bubble">' + esc(m.text) + '</div>' +
+                '<div class="sinf-msg-time">' + t(m.ts) + '</div>';
+            msgsEl.appendChild(d);
+        });
+        if (atBottom) msgsEl.scrollTop = msgsEl.scrollHeight;
+    }
+
+    function send() {
+        const name = (nameInp.value || '').trim();
+        const text = (msgInp.value  || '').trim();
+        if (!name) { nameInp.focus(); nameInp.style.borderColor = 'rgba(200,146,42,0.8)'; return; }
+        nameInp.style.borderColor = '';
+        if (!text) return;
+        localStorage.setItem(NKEY, name);
+        const arr = get();
+        arr.push({ name, text, ts: Date.now() });
+        save(arr);
+        msgInp.value = '';
+        msgInp.style.height = '';
+        render();
+        try { new BroadcastChannel('sinf10v_chat').postMessage('new'); } catch(e) {}
+    }
+
+    sendBtn.addEventListener('click', send);
+    msgInp.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+    });
+    msgInp.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 86) + 'px';
+    });
+
+    try { new BroadcastChannel('sinf10v_chat').onmessage = render; } catch(e) {}
+    setInterval(render, 3000);
+    render();
+})();
+</script>
+
+</body>
+</html>
