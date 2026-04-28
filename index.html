@@ -10,8 +10,370 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+    /* ===== LOGIN MODAL ===== */
+    #login-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0,0,0,0.75);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+    }
+    #login-overlay.hidden { display: none; }
+
+    .login-modal {
+        background: var(--card-bg, #1a1a1a);
+        border: 1px solid rgba(200,146,42,0.25);
+        border-radius: 16px;
+        padding: 2rem 2rem 1.75rem;
+        width: 100%;
+        max-width: 400px;
+        margin: 1rem;
+        box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+        animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to   { transform: translateY(0);   opacity: 1; }
+    }
+    .login-modal .lm-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+    }
+    .login-modal .lm-logo span {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 15px;
+        color: #c8922a;
+        letter-spacing: 0.04em;
+    }
+    .login-modal h2 {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 22px;
+        color: #f0e6d0;
+        margin-bottom: 0.4rem;
+        font-weight: 700;
+    }
+    .login-modal .lm-sub {
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 13px;
+        color: rgba(240,230,208,0.5);
+        margin-bottom: 1.5rem;
+    }
+    .lm-field { margin-bottom: 1rem; }
+    .lm-field label {
+        display: block;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(200,146,42,0.8);
+        margin-bottom: 6px;
+    }
+    .lm-field input {
+        width: 100%;
+        padding: 10px 14px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(200,146,42,0.2);
+        border-radius: 8px;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 15px;
+        color: #f0e6d0;
+        outline: none;
+        transition: border 0.2s;
+    }
+    .lm-field input:focus { border-color: rgba(200,146,42,0.6); }
+    .lm-field input::placeholder { color: rgba(240,230,208,0.25); }
+    .lm-err {
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 12px;
+        color: #e24b4a;
+        margin: -6px 0 10px;
+        display: none;
+    }
+    .lm-btn {
+        width: 100%;
+        padding: 11px;
+        background: #c8922a;
+        border: none;
+        border-radius: 8px;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-bottom: 0.75rem;
+    }
+    .lm-btn:hover { background: #a87420; }
+    .lm-admin-link {
+        display: block;
+        text-align: center;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 12px;
+        color: rgba(200,146,42,0.5);
+        cursor: pointer;
+        text-decoration: underline;
+        background: none;
+        border: none;
+        width: 100%;
+    }
+    .lm-admin-link:hover { color: rgba(200,146,42,0.9); }
+
+    /* ===== ADMIN PANEL ===== */
+    #admin-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: rgba(0,0,0,0.85);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 2rem 1rem;
+        overflow-y: auto;
+        backdrop-filter: blur(6px);
+    }
+    #admin-overlay.hidden { display: none; }
+
+    .admin-panel {
+        background: var(--card-bg, #1a1a1a);
+        border: 1px solid rgba(200,146,42,0.25);
+        border-radius: 16px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 750px;
+        animation: modalIn 0.3s ease;
+    }
+    .admin-panel .ap-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+    }
+    .admin-panel h2 {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 20px;
+        color: #f0e6d0;
+    }
+    .ap-close {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        color: #f0e6d0;
+        font-size: 14px;
+        padding: 6px 14px;
+        cursor: pointer;
+        font-family: 'Nunito Sans', sans-serif;
+    }
+    .ap-close:hover { background: rgba(255,255,255,0.1); }
+    .ap-stats {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 1.5rem;
+    }
+    .ap-stat {
+        flex: 1;
+        background: rgba(200,146,42,0.08);
+        border: 1px solid rgba(200,146,42,0.15);
+        border-radius: 10px;
+        padding: 0.9rem 1rem;
+    }
+    .ap-stat-n {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 28px;
+        color: #c8922a;
+    }
+    .ap-stat-l {
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 12px;
+        color: rgba(240,230,208,0.45);
+        margin-top: 2px;
+    }
+    .ap-search-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 1rem;
+    }
+    .ap-search-row input {
+        flex: 1;
+        padding: 9px 12px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(200,146,42,0.2);
+        border-radius: 8px;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 14px;
+        color: #f0e6d0;
+        outline: none;
+    }
+    .ap-search-row input::placeholder { color: rgba(240,230,208,0.25); }
+    .ap-csv-btn {
+        padding: 9px 14px;
+        background: rgba(200,146,42,0.15);
+        border: 1px solid rgba(200,146,42,0.3);
+        border-radius: 8px;
+        color: #c8922a;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+    .ap-csv-btn:hover { background: rgba(200,146,42,0.25); }
+    .ap-table-wrap { overflow-x: auto; }
+    .ap-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 14px;
+    }
+    .ap-table th {
+        text-align: left;
+        padding: 8px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(200,146,42,0.6);
+        border-bottom: 1px solid rgba(200,146,42,0.1);
+    }
+    .ap-table td {
+        padding: 11px 10px;
+        color: #f0e6d0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .ap-table tr:last-child td { border-bottom: none; }
+    .ap-table tr:hover td { background: rgba(200,146,42,0.04); }
+    .ap-num { color: rgba(240,230,208,0.35); }
+    .ap-phone { font-family: monospace; font-size: 13px; color: #c8922a; }
+    .ap-time { font-size: 12px; color: rgba(240,230,208,0.4); }
+    .ap-badge {
+        display: inline-block;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 20px;
+        background: rgba(200,146,42,0.15);
+        color: #c8922a;
+        font-weight: 700;
+    }
+    .ap-del {
+        font-size: 12px;
+        padding: 3px 8px;
+        border: 1px solid rgba(226,75,74,0.3);
+        border-radius: 6px;
+        cursor: pointer;
+        background: transparent;
+        color: rgba(226,75,74,0.6);
+        font-family: 'Nunito Sans', sans-serif;
+    }
+    .ap-del:hover { border-color: #e24b4a; color: #e24b4a; }
+    .ap-empty {
+        text-align: center;
+        padding: 2rem;
+        color: rgba(240,230,208,0.3);
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 14px;
+    }
+
+    /* light mode overrides */
+    body.light-mode .login-modal,
+    body.light-mode .admin-panel {
+        background: #fff;
+        border-color: rgba(180,120,20,0.25);
+    }
+    body.light-mode .login-modal h2,
+    body.light-mode .admin-panel h2 { color: #2a1f00; }
+    body.light-mode .lm-sub,
+    body.light-mode .ap-stat-l { color: rgba(42,31,0,0.5); }
+    body.light-mode .lm-field input,
+    body.light-mode .ap-search-row input {
+        background: rgba(0,0,0,0.04);
+        border-color: rgba(180,120,20,0.2);
+        color: #2a1f00;
+    }
+    body.light-mode .lm-field input::placeholder,
+    body.light-mode .ap-search-row input::placeholder { color: rgba(42,31,0,0.25); }
+    body.light-mode .ap-stat { background: rgba(180,120,20,0.06); }
+    body.light-mode .ap-stat-n { color: #a87420; }
+    body.light-mode .ap-table td { color: #2a1f00; }
+    body.light-mode .ap-close { color: #2a1f00; background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); }
+    body.light-mode .ap-empty { color: rgba(42,31,0,0.35); }
+    body.light-mode .ap-phone { color: #a87420; }
+    body.light-mode #login-overlay { background: rgba(0,0,0,0.6); }
+    </style>
 </head>
 <body>
+
+<!-- ===== LOGIN OVERLAY ===== -->
+<div id="login-overlay">
+    <div class="login-modal">
+        <div class="lm-logo">
+            <img src="./images/logo.png" alt="Logo" style="height:28px;width:28px;object-fit:contain">
+            <span>5-MAKTAB · 10-V SINF</span>
+        </div>
+        <h2>Xush kelibsiz! 👋</h2>
+        <p class="lm-sub">Sahifaga kirish uchun ismingiz va raqamingizni kiriting</p>
+
+        <div class="lm-field">
+            <label>To'liq ismingiz</label>
+            <input id="lm-name" type="text" placeholder="Masalan: Sanjar Baxriddinov" maxlength="40" autocomplete="name">
+        </div>
+        <div class="lm-field">
+            <label>Telefon raqamingiz</label>
+            <input id="lm-phone" type="tel" placeholder="+998 90 123 45 67" maxlength="20" autocomplete="tel">
+        </div>
+        <div class="lm-err" id="lm-err">Iltimos, ism va raqamni to'liq kiriting</div>
+
+        <button class="lm-btn" id="lm-submit">Kirish →</button>
+        <button class="lm-admin-link" id="lm-admin-open">🔐 Admin panel</button>
+    </div>
+</div>
+
+<!-- ===== ADMIN OVERLAY ===== -->
+<div id="admin-overlay" class="hidden">
+    <div class="admin-panel">
+        <div class="ap-header">
+            <h2>🔐 Admin Panel — 10-V Sinf</h2>
+            <button class="ap-close" id="ap-close-btn">✕ Yopish</button>
+        </div>
+        <div class="ap-stats">
+            <div class="ap-stat">
+                <div class="ap-stat-n" id="ap-total">0</div>
+                <div class="ap-stat-l">Jami ro'yxatdan o'tganlar</div>
+            </div>
+            <div class="ap-stat">
+                <div class="ap-stat-n" id="ap-today">0</div>
+                <div class="ap-stat-l">Bugun kirganlar</div>
+            </div>
+        </div>
+        <div class="ap-search-row">
+            <input type="text" id="ap-search" placeholder="Ism yoki raqam bo'yicha qidirish...">
+            <button class="ap-csv-btn" id="ap-csv">⬇ CSV</button>
+        </div>
+        <div class="ap-table-wrap">
+            <table class="ap-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ism</th>
+                        <th>Telefon</th>
+                        <th>Birinchi kirish</th>
+                        <th>Kirish soni</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="ap-tbody"></tbody>
+            </table>
+            <div class="ap-empty hidden" id="ap-empty">Hech kim topilmadi</div>
+        </div>
+    </div>
+</div>
 
 <!-- ===== HEADER ===== -->
 <header class="main-header">
@@ -34,6 +396,9 @@
             </a>
             <button id="dark-mode-toggle" title="Tema o'zgartirish">
                 <i class="fas fa-sun"></i>
+            </button>
+            <button onclick="openAdminPanel()" title="Admin" style="background:none;border:none;cursor:pointer;color:rgba(200,146,42,0.35);font-size:13px;padding:4px 6px;">
+                <i class="fas fa-lock"></i>
             </button>
         </nav>
     </div>
@@ -166,7 +531,6 @@
         <button class="f-btn" data-filter="dars">Dars</button>
     </div>
 
-    <!-- MASONRY — 15 ta rasm -->
     <div class="gallery-masonry" id="galleryGrid">
 
         <div class="g-item qizlar" data-aos="fade-up">
@@ -204,7 +568,6 @@
             </a>
         </div>
 
-        <!-- 6–15: o'z rasmlaringiz nomini yozing -->
         <div class="g-item iftorlik" data-aos="fade-up" data-aos-delay="50">
             <a href="./images/iftorlik.jpg" data-fancybox="gallery" data-caption="Iftorlik 2">
                 <img src="./images/iftorlik.jpg" alt="Iftorlik 2" loading="lazy">
@@ -325,10 +688,167 @@
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
 <script>
-// 1. AOS
+// ============================================================
+//  CONFIG — parolni shu yerda o'zgartiring
+// ============================================================
+const ADMIN_PASS  = "10v2026";
+const USERS_KEY   = "sinf10v_users_v1";
+const SESSION_KEY = "sinf10v_session";
+
+// ============================================================
+//  STORAGE HELPERS
+// ============================================================
+function getUsers() {
+    try { return JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); }
+    catch { return []; }
+}
+function saveUsers(arr) {
+    localStorage.setItem(USERS_KEY, JSON.stringify(arr));
+}
+function esc(s) {
+    return String(s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function timeStr(ts) {
+    if (!ts) return '—';
+    const d   = new Date(ts);
+    const pad = n => n.toString().padStart(2,'0');
+    return pad(d.getDate())+'.'+pad(d.getMonth()+1)+'.'+d.getFullYear()
+         + ' '+pad(d.getHours())+':'+pad(d.getMinutes());
+}
+
+// ============================================================
+//  LOGIN
+// ============================================================
+const loginOverlay = document.getElementById('login-overlay');
+const lmName  = document.getElementById('lm-name');
+const lmPhone = document.getElementById('lm-phone');
+const lmErr   = document.getElementById('lm-err');
+
+if (sessionStorage.getItem(SESSION_KEY)) {
+    loginOverlay.classList.add('hidden');
+}
+
+document.getElementById('lm-submit').addEventListener('click', doLogin);
+lmName.addEventListener('keydown',  e => { if(e.key==='Enter') lmPhone.focus(); });
+lmPhone.addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function doLogin() {
+    const name  = lmName.value.trim();
+    const phone = lmPhone.value.trim();
+    if (!name || !phone) { lmErr.style.display='block'; return; }
+    lmErr.style.display = 'none';
+
+    const users = getUsers();
+    const idx   = users.findIndex(u => u.phone === phone);
+    if (idx === -1) {
+        users.push({ name, phone, ts: Date.now(), count: 1, lastSeen: Date.now() });
+    } else {
+        users[idx].count    = (users[idx].count || 1) + 1;
+        users[idx].lastSeen = Date.now();
+        users[idx].name     = name;
+    }
+    saveUsers(users);
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify({ name, phone }));
+
+    const chatName = document.getElementById('sinf-name');
+    if (chatName && !chatName.value) chatName.value = name;
+
+    loginOverlay.classList.add('hidden');
+}
+
+// ============================================================
+//  ADMIN PANEL
+// ============================================================
+const adminOverlay = document.getElementById('admin-overlay');
+
+document.getElementById('lm-admin-open').addEventListener('click', openAdminPanel);
+document.getElementById('ap-close-btn').addEventListener('click', () => {
+    adminOverlay.classList.add('hidden');
+    if (!sessionStorage.getItem(SESSION_KEY)) loginOverlay.classList.remove('hidden');
+});
+
+function openAdminPanel() {
+    loginOverlay.classList.add('hidden');
+    const pass = prompt('Admin parolini kiriting:');
+    if (pass === null) {
+        if (!sessionStorage.getItem(SESSION_KEY)) loginOverlay.classList.remove('hidden');
+        return;
+    }
+    if (pass !== ADMIN_PASS) {
+        alert('Noto\'g\'ri parol!');
+        if (!sessionStorage.getItem(SESSION_KEY)) loginOverlay.classList.remove('hidden');
+        return;
+    }
+    adminOverlay.classList.remove('hidden');
+    renderAdminTable('');
+}
+
+function renderAdminTable(q) {
+    const users   = getUsers();
+    const today   = new Date(); today.setHours(0,0,0,0);
+    const todayTs = today.getTime();
+
+    document.getElementById('ap-total').textContent = users.length;
+    document.getElementById('ap-today').textContent =
+        users.filter(u => (u.lastSeen || u.ts) >= todayTs).length;
+
+    const q2       = (q||'').toLowerCase();
+    const filtered = users.filter(u =>
+        u.name.toLowerCase().includes(q2) || u.phone.includes(q2)
+    );
+    const tbody = document.getElementById('ap-tbody');
+    const empty = document.getElementById('ap-empty');
+
+    if (!filtered.length) {
+        tbody.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+    }
+    empty.classList.add('hidden');
+    tbody.innerHTML = filtered.map((u,i) => `
+        <tr>
+          <td class="ap-num">${i+1}</td>
+          <td><strong>${esc(u.name)}</strong></td>
+          <td class="ap-phone">${esc(u.phone)}</td>
+          <td class="ap-time">${timeStr(u.ts)}</td>
+          <td><span class="ap-badge">${u.count||1}x</span></td>
+          <td><button class="ap-del" onclick="deleteUser('${esc(u.phone)}')">O'chirish</button></td>
+        </tr>`).join('');
+}
+
+document.getElementById('ap-search').addEventListener('input', function() {
+    renderAdminTable(this.value);
+});
+
+function deleteUser(phone) {
+    if (!confirm('Bu foydalanuvchini o\'chirasizmi?')) return;
+    saveUsers(getUsers().filter(u => u.phone !== phone));
+    renderAdminTable(document.getElementById('ap-search').value);
+}
+
+document.getElementById('ap-csv').addEventListener('click', () => {
+    const users = getUsers();
+    const rows  = [
+        ['#','Ism','Telefon','Kirish vaqti','Kirish soni'],
+        ...users.map((u,i) => [i+1, u.name, u.phone, timeStr(u.ts), u.count||1])
+    ];
+    const csv = rows.map(r => r.join(',')).join('\n');
+    const a   = document.createElement('a');
+    a.href     = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
+    a.download = '10v_sinf_users.csv';
+    a.click();
+});
+
+// ============================================================
+//  AOS
+// ============================================================
 AOS.init({ duration: 800, once: true, offset: 50 });
 
-// 2. Fancybox
+// ============================================================
+//  Fancybox
+// ============================================================
 document.addEventListener("DOMContentLoaded", () => {
     Fancybox.defaults.Hash = false;
     setTimeout(() => Fancybox.close(), 10);
@@ -339,15 +859,16 @@ Fancybox.bind("[data-fancybox]", {
     autoFocus: false
 });
 
-// 3. Dark / Light toggle
+// ============================================================
+//  Dark / Light toggle
+// ============================================================
 const toggleBtn = document.getElementById('dark-mode-toggle');
-const tIcon = toggleBtn.querySelector('i');
+const tIcon     = toggleBtn.querySelector('i');
 
 if (localStorage.getItem('theme') === 'light') {
     document.body.classList.add('light-mode');
     tIcon.classList.replace('fa-sun', 'fa-moon');
 }
-
 toggleBtn.addEventListener('click', () => {
     document.body.classList.toggle('light-mode');
     const isLight = document.body.classList.contains('light-mode');
@@ -358,58 +879,73 @@ toggleBtn.addEventListener('click', () => {
     );
 });
 
-// 4. Gallery filter
+// ============================================================
+//  Gallery filter
+// ============================================================
 document.querySelectorAll('.f-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelector('.f-btn.active')?.classList.remove('active');
         btn.classList.add('active');
         const cat = btn.dataset.filter;
         document.querySelectorAll('.g-item').forEach(item => {
-            item.style.display = (cat === 'all' || item.classList.contains(cat)) ? '' : 'none';
+            item.style.display =
+                (cat === 'all' || item.classList.contains(cat)) ? '' : 'none';
         });
         AOS.refresh();
     });
 });
 
-// 5. Chat
+// ============================================================
+//  Chat
+// ============================================================
 (function () {
-    const STORE = 'sinf10v_chat_v1';
-    const NKEY  = 'sinf10v_myname';
+    const STORE   = 'sinf10v_chat_v1';
+    const NKEY    = 'sinf10v_myname';
     const msgsEl  = document.getElementById('sinf-msgs');
     const nameInp = document.getElementById('sinf-name');
     const msgInp  = document.getElementById('sinf-msg');
     const sendBtn = document.getElementById('sinf-send');
 
-    nameInp.value = localStorage.getItem(NKEY) || '';
+    const sess = sessionStorage.getItem(SESSION_KEY);
+    if (sess) {
+        try { nameInp.value = JSON.parse(sess).name || ''; } catch {}
+    } else {
+        nameInp.value = localStorage.getItem(NKEY) || '';
+    }
 
     function get() {
         try { return JSON.parse(localStorage.getItem(STORE) || '[]'); }
         catch { return []; }
     }
     function save(a) { localStorage.setItem(STORE, JSON.stringify(a.slice(-300))); }
-    function esc(s)  { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function escTxt(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
     function t(ts) {
         const d = new Date(ts);
-        return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+        return d.getHours().toString().padStart(2,'0') + ':' +
+               d.getMinutes().toString().padStart(2,'0');
     }
 
     function render() {
-        const arr = get();
-        const me  = (nameInp.value || '').trim();
-        const atBottom = msgsEl.scrollHeight - msgsEl.scrollTop - msgsEl.clientHeight < 50;
+        const arr      = get();
+        const me       = (nameInp.value || '').trim();
+        const atBottom =
+            msgsEl.scrollHeight - msgsEl.scrollTop - msgsEl.clientHeight < 50;
         msgsEl.innerHTML = '';
         if (!arr.length) {
-            msgsEl.innerHTML = '<div class="sinf-empty">Hozircha xabar yo\'q. Birinchi bo\'lib yozing! ✨</div>';
+            msgsEl.innerHTML =
+                '<div class="sinf-empty">Hozircha xabar yo\'q. Birinchi bo\'lib yozing! ✨</div>';
             return;
         }
         arr.forEach(m => {
             const isMe = me && m.name === me;
-            const d = document.createElement('div');
+            const d    = document.createElement('div');
             d.className = 'sinf-msg ' + (isMe ? 'me' : 'other');
             d.innerHTML =
-                '<div class="sinf-msg-name">' + esc(m.name) + '</div>' +
-                '<div class="sinf-msg-bubble">' + esc(m.text) + '</div>' +
-                '<div class="sinf-msg-time">' + t(m.ts) + '</div>';
+                '<div class="sinf-msg-name">'   + escTxt(m.name) + '</div>' +
+                '<div class="sinf-msg-bubble">' + escTxt(m.text) + '</div>' +
+                '<div class="sinf-msg-time">'   + t(m.ts)        + '</div>';
             msgsEl.appendChild(d);
         });
         if (atBottom) msgsEl.scrollTop = msgsEl.scrollHeight;
@@ -418,14 +954,18 @@ document.querySelectorAll('.f-btn').forEach(btn => {
     function send() {
         const name = (nameInp.value || '').trim();
         const text = (msgInp.value  || '').trim();
-        if (!name) { nameInp.focus(); nameInp.style.borderColor = 'rgba(200,146,42,0.8)'; return; }
+        if (!name) {
+            nameInp.focus();
+            nameInp.style.borderColor = 'rgba(200,146,42,0.8)';
+            return;
+        }
         nameInp.style.borderColor = '';
         if (!text) return;
         localStorage.setItem(NKEY, name);
         const arr = get();
         arr.push({ name, text, ts: Date.now() });
         save(arr);
-        msgInp.value = '';
+        msgInp.value       = '';
         msgInp.style.height = '';
         render();
         try { new BroadcastChannel('sinf10v_chat').postMessage('new'); } catch(e) {}
