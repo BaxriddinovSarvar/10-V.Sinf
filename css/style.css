@@ -176,7 +176,6 @@ body::before {
     overflow: hidden;
 }
 
-/* Katta dekorativ harf */
 .hero::after {
     content: 'V';
     position: absolute;
@@ -319,10 +318,7 @@ body::before {
 }
 
 /* ===== SECTION HEADER ===== */
-.section-header {
-    margin-bottom: 52px;
-}
-
+.section-header { margin-bottom: 52px; }
 .section-header.center { text-align: center; }
 
 .section-label {
@@ -433,10 +429,7 @@ body::before {
     border-radius: 0 0 0 var(--r);
 }
 
-.t-img {
-    flex-shrink: 0;
-    position: relative;
-}
+.t-img { flex-shrink: 0; position: relative; }
 
 .t-img img {
     width: 200px;
@@ -706,10 +699,8 @@ body::before {
 }
 
 .sinf-chat-header h3 {
-    font-size: 13px;
     font-weight: 700;
     color: var(--cream);
-    letter-spacing: 0.3px;
     font-family: var(--font-b);
     text-transform: uppercase;
     letter-spacing: 1.5px;
