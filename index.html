@@ -88,6 +88,7 @@
         color: #f0e6d0;
         outline: none;
         transition: border 0.2s;
+        box-sizing: border-box;
     }
     .lm-field input:focus { border-color: rgba(200,146,42,0.6); }
     .lm-field input::placeholder { color: rgba(240,230,208,0.25); }
@@ -113,6 +114,7 @@
         margin-bottom: 0.75rem;
     }
     .lm-btn:hover { background: #a87420; }
+    .lm-btn:disabled { background: #7a6030; cursor: not-allowed; opacity: 0.7; }
     .lm-admin-link {
         display: block;
         text-align: center;
@@ -126,6 +128,25 @@
         width: 100%;
     }
     .lm-admin-link:hover { color: rgba(200,146,42,0.9); }
+    .lm-geo-status {
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 11px;
+        color: rgba(200,146,42,0.6);
+        margin: -4px 0 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .lm-geo-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: #c8922a;
+        animation: geopulse 1.5s infinite;
+        flex-shrink: 0;
+    }
+    @keyframes geopulse {
+        0%,100%{opacity:1} 50%{opacity:.3}
+    }
 
     /* ===== ADMIN PANEL ===== */
     #admin-overlay {
@@ -148,7 +169,7 @@
         border-radius: 16px;
         padding: 2rem;
         width: 100%;
-        max-width: 750px;
+        max-width: 960px;
         animation: modalIn 0.3s ease;
     }
     .admin-panel .ap-header {
@@ -156,6 +177,8 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 10px;
     }
     .admin-panel h2 {
         font-family: 'Libre Baskerville', serif;
@@ -177,9 +200,11 @@
         display: flex;
         gap: 12px;
         margin-bottom: 1.5rem;
+        flex-wrap: wrap;
     }
     .ap-stat {
         flex: 1;
+        min-width: 120px;
         background: rgba(200,146,42,0.08);
         border: 1px solid rgba(200,146,42,0.15);
         border-radius: 10px;
@@ -200,9 +225,11 @@
         display: flex;
         gap: 8px;
         margin-bottom: 1rem;
+        flex-wrap: wrap;
     }
     .ap-search-row input {
         flex: 1;
+        min-width: 160px;
         padding: 9px 12px;
         background: rgba(255,255,255,0.05);
         border: 1px solid rgba(200,146,42,0.2);
@@ -231,28 +258,31 @@
         width: 100%;
         border-collapse: collapse;
         font-family: 'Nunito Sans', sans-serif;
-        font-size: 14px;
+        font-size: 13px;
+        min-width: 700px;
     }
     .ap-table th {
         text-align: left;
         padding: 8px 10px;
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         color: rgba(200,146,42,0.6);
         border-bottom: 1px solid rgba(200,146,42,0.1);
+        white-space: nowrap;
     }
     .ap-table td {
-        padding: 11px 10px;
+        padding: 10px 10px;
         color: #f0e6d0;
         border-bottom: 1px solid rgba(255,255,255,0.05);
+        vertical-align: top;
     }
     .ap-table tr:last-child td { border-bottom: none; }
     .ap-table tr:hover td { background: rgba(200,146,42,0.04); }
     .ap-num { color: rgba(240,230,208,0.35); }
-    .ap-phone { font-family: monospace; font-size: 13px; color: #c8922a; }
-    .ap-time { font-size: 12px; color: rgba(240,230,208,0.4); }
+    .ap-phone { font-family: monospace; font-size: 12px; color: #c8922a; }
+    .ap-time { font-size: 11px; color: rgba(240,230,208,0.4); }
     .ap-badge {
         display: inline-block;
         font-size: 11px;
@@ -263,7 +293,7 @@
         font-weight: 700;
     }
     .ap-del {
-        font-size: 12px;
+        font-size: 11px;
         padding: 3px 8px;
         border: 1px solid rgba(226,75,74,0.3);
         border-radius: 6px;
@@ -271,6 +301,7 @@
         background: transparent;
         color: rgba(226,75,74,0.6);
         font-family: 'Nunito Sans', sans-serif;
+        white-space: nowrap;
     }
     .ap-del:hover { border-color: #e24b4a; color: #e24b4a; }
     .ap-empty {
@@ -280,6 +311,79 @@
         font-family: 'Nunito Sans', sans-serif;
         font-size: 14px;
     }
+    .ap-geo {
+        font-size: 11px;
+        color: rgba(240,230,208,0.55);
+        line-height: 1.5;
+        max-width: 200px;
+    }
+    .ap-geo strong {
+        display: block;
+        color: #d4a843;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .ap-geo .ap-geo-street {
+        color: rgba(212,168,67,0.75);
+        font-size: 10px;
+    }
+    .ap-geo-none {
+        font-size: 11px;
+        color: rgba(240,230,208,0.2);
+        font-style: italic;
+    }
+    .ap-device {
+        font-size: 10px;
+        color: rgba(240,230,208,0.35);
+        line-height: 1.5;
+        max-width: 160px;
+    }
+    .ap-device span {
+        display: inline-block;
+        background: rgba(255,255,255,0.05);
+        padding: 1px 6px;
+        border-radius: 4px;
+        margin: 1px 0;
+        font-family: monospace;
+        font-size: 10px;
+    }
+    .ap-detail-row td {
+        padding: 0 10px;
+        border-bottom: 1px solid rgba(200,146,42,0.06);
+    }
+    .ap-detail-inner {
+        background: rgba(200,146,42,0.04);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 12px;
+        color: rgba(240,230,208,0.6);
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+        gap: 8px 20px;
+        margin: 6px 0;
+    }
+    .ap-detail-item strong {
+        display: block;
+        font-size: 9px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgba(200,146,42,0.5);
+        margin-bottom: 3px;
+    }
+    .ap-expand-btn {
+        font-size: 10px;
+        padding: 2px 7px;
+        border: 1px solid rgba(200,146,42,0.2);
+        border-radius: 5px;
+        cursor: pointer;
+        background: transparent;
+        color: rgba(200,146,42,0.5);
+        font-family: 'Nunito Sans', sans-serif;
+        white-space: nowrap;
+        margin-right: 4px;
+    }
+    .ap-expand-btn:hover { border-color: rgba(200,146,42,0.5); color: #c8922a; }
 
     /* light mode overrides */
     body.light-mode .login-modal,
@@ -306,6 +410,9 @@
     body.light-mode .ap-empty { color: rgba(42,31,0,0.35); }
     body.light-mode .ap-phone { color: #a87420; }
     body.light-mode #login-overlay { background: rgba(0,0,0,0.6); }
+    body.light-mode .ap-geo { color: rgba(42,31,0,0.55); }
+    body.light-mode .ap-device { color: rgba(42,31,0,0.4); }
+    body.light-mode .ap-detail-inner { background: rgba(180,120,20,0.04); color: rgba(42,31,0,0.6); }
     </style>
 </head>
 <body>
@@ -329,6 +436,10 @@
             <input id="lm-phone" type="tel" placeholder="+998 90 123 45 67" maxlength="20" autocomplete="tel">
         </div>
         <div class="lm-err" id="lm-err">Iltimos, ism va raqamni to'liq kiriting</div>
+        <div class="lm-geo-status" id="lm-geo-status" style="display:none">
+            <div class="lm-geo-dot"></div>
+            <span id="lm-geo-text">Joylashuv aniqlanmoqda...</span>
+        </div>
 
         <button class="lm-btn" id="lm-submit">Kirish →</button>
         <button class="lm-admin-link" id="lm-admin-open">🔐 Admin panel</button>
@@ -351,9 +462,13 @@
                 <div class="ap-stat-n" id="ap-today">0</div>
                 <div class="ap-stat-l">Bugun kirganlar</div>
             </div>
+            <div class="ap-stat">
+                <div class="ap-stat-n" id="ap-geo-count">0</div>
+                <div class="ap-stat-l">Joylashuvi aniqlangan</div>
+            </div>
         </div>
         <div class="ap-search-row">
-            <input type="text" id="ap-search" placeholder="Ism yoki raqam bo'yicha qidirish...">
+            <input type="text" id="ap-search" placeholder="Ism, raqam yoki manzil bo'yicha qidirish...">
             <button class="ap-csv-btn" id="ap-csv">⬇ CSV</button>
         </div>
         <div class="ap-table-wrap">
@@ -363,6 +478,8 @@
                         <th>#</th>
                         <th>Ism</th>
                         <th>Telefon</th>
+                        <th>Manzil (Geolokatsiya)</th>
+                        <th>Qurilma</th>
                         <th>Birinchi kirish</th>
                         <th>Kirish soni</th>
                         <th></th>
@@ -689,11 +806,20 @@
 
 <script>
 // ============================================================
-//  CONFIG — parolni shu yerda o'zgartiring
+//  CONFIG  —  parol ochiq saqlanmaydi, faqat SHA-256 hash
+//  Parol: 10v2026
 // ============================================================
-const ADMIN_PASS  = "10v2026";
+const ADMIN_HASH  = "7320f816aaee4eba27f0be4b9d19bedfc0dda3c9cd51c52bf9eeb52b9bee10da";
 const USERS_KEY   = "sinf10v_users_v1";
 const SESSION_KEY = "sinf10v_session";
+
+// ============================================================
+//  PAROLNI HASH QILISH (Web Crypto API — brauzerda ishlaydi)
+// ============================================================
+async function hashPassword(str) {
+    const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
 
 // ============================================================
 //  STORAGE HELPERS
@@ -719,12 +845,111 @@ function timeStr(ts) {
 }
 
 // ============================================================
+//  DEVICE & IP INFO
+// ============================================================
+function getDeviceInfo() {
+    const ua = navigator.userAgent;
+    let os = 'Noma\'lum', browser = 'Noma\'lum', device = 'Desktop';
+
+    if (/Android/i.test(ua))          os = 'Android';
+    else if (/iPhone|iPad/i.test(ua)) os = 'iOS';
+    else if (/Windows/i.test(ua))     os = 'Windows';
+    else if (/Mac OS/i.test(ua))      os = 'macOS';
+    else if (/Linux/i.test(ua))       os = 'Linux';
+
+    if (/Chrome\/[0-9]/i.test(ua) && !/Edg|OPR/i.test(ua)) browser = 'Chrome';
+    else if (/Firefox/i.test(ua))  browser = 'Firefox';
+    else if (/Safari/i.test(ua) && !/Chrome/i.test(ua))     browser = 'Safari';
+    else if (/Edg/i.test(ua))      browser = 'Edge';
+    else if (/OPR|Opera/i.test(ua)) browser = 'Opera';
+
+    if (/Mobi|Android/i.test(ua))     device = 'Mobil';
+    else if (/Tablet|iPad/i.test(ua)) device = 'Tablet';
+
+    return {
+        os, browser, device,
+        screen: `${window.screen.width}×${window.screen.height}`,
+        lang: navigator.language || '—',
+        ua
+    };
+}
+
+async function getIPInfo() {
+    try {
+        const r = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) });
+        if (!r.ok) throw new Error();
+        const d = await r.json();
+        return {
+            ip:      d.ip             || '—',
+            city:    d.city           || '—',
+            region:  d.region         || '—',
+            country: d.country_name   || '—',
+            org:     d.org            || '—',
+            postal:  d.postal         || ''
+        };
+    } catch { return null; }
+}
+
+// ============================================================
+//  GEOLOCATION
+// ============================================================
+function reverseGeocode(lat, lon) {
+    return fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=uz,ru,en`,
+        { headers: { 'Accept-Language': 'uz,ru;q=0.9,en;q=0.8' }, signal: AbortSignal.timeout(8000) }
+    )
+    .then(r => r.json())
+    .then(d => {
+        const a = d.address || {};
+        return {
+            raw:      d.display_name || '—',
+            road:     a.road || a.pedestrian || a.footway || a.street || '',
+            house:    a.house_number || '',
+            quarter:  a.quarter || a.suburb || a.neighbourhood || '',
+            city:     a.city || a.town || a.village || a.municipality || '',
+            district: a.county || a.district || '',
+            region:   a.state || '',
+            country:  a.country || '',
+            postcode: a.postcode || '',
+            lat, lon
+        };
+    })
+    .catch(() => null);
+}
+
+function requestGeoLocation(onDone) {
+    if (!navigator.geolocation) { onDone(null); return; }
+    const geoStatus = document.getElementById('lm-geo-status');
+    const geoText   = document.getElementById('lm-geo-text');
+    if (geoStatus) geoStatus.style.display = 'flex';
+    if (geoText)   geoText.textContent = 'Joylashuv aniqlanmoqda...';
+
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            if (geoText) geoText.textContent = 'Manzil aniqlanmoqda...';
+            reverseGeocode(pos.coords.latitude, pos.coords.longitude).then(geo => {
+                if (geoStatus) geoStatus.style.display = 'none';
+                onDone({
+                    lat: pos.coords.latitude,
+                    lon: pos.coords.longitude,
+                    acc: Math.round(pos.coords.accuracy),
+                    ...(geo || {})
+                });
+            });
+        },
+        () => { if (geoStatus) geoStatus.style.display = 'none'; onDone(null); },
+        { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+    );
+}
+
+// ============================================================
 //  LOGIN
 // ============================================================
 const loginOverlay = document.getElementById('login-overlay');
 const lmName  = document.getElementById('lm-name');
 const lmPhone = document.getElementById('lm-phone');
 const lmErr   = document.getElementById('lm-err');
+const lmBtn   = document.getElementById('lm-submit');
 
 if (sessionStorage.getItem(SESSION_KEY)) {
     loginOverlay.classList.add('hidden');
@@ -739,27 +964,42 @@ function doLogin() {
     const phone = lmPhone.value.trim();
     if (!name || !phone) { lmErr.style.display='block'; return; }
     lmErr.style.display = 'none';
+    lmBtn.disabled = true;
+    lmBtn.textContent = 'Aniqlanmoqda...';
 
-    const users = getUsers();
-    const idx   = users.findIndex(u => u.phone === phone);
-    if (idx === -1) {
-        users.push({ name, phone, ts: Date.now(), count: 1, lastSeen: Date.now() });
-    } else {
-        users[idx].count    = (users[idx].count || 1) + 1;
-        users[idx].lastSeen = Date.now();
-        users[idx].name     = name;
-    }
-    saveUsers(users);
-    sessionStorage.setItem(SESSION_KEY, JSON.stringify({ name, phone }));
+    const device = getDeviceInfo();
 
-    const chatName = document.getElementById('sinf-name');
-    if (chatName && !chatName.value) chatName.value = name;
+    requestGeoLocation(async (geoData) => {
+        const ipInfo = await getIPInfo();
+        const users  = getUsers();
+        const idx    = users.findIndex(u => u.phone === phone);
+        const now    = Date.now();
 
-    loginOverlay.classList.add('hidden');
+        const entry = {
+            name, phone,
+            ts:       idx === -1 ? now : (users[idx].ts || now),
+            lastSeen: now,
+            count:    idx === -1 ? 1 : ((users[idx].count || 1) + 1),
+            device, ip: ipInfo, geo: geoData
+        };
+
+        if (idx === -1) { users.push(entry); }
+        else { users[idx] = { ...users[idx], ...entry, ts: users[idx].ts || now }; }
+
+        saveUsers(users);
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify({ name, phone }));
+
+        const chatName = document.getElementById('sinf-name');
+        if (chatName && !chatName.value) chatName.value = name;
+
+        lmBtn.disabled = false;
+        lmBtn.textContent = 'Kirish →';
+        loginOverlay.classList.add('hidden');
+    });
 }
 
 // ============================================================
-//  ADMIN PANEL
+//  ADMIN PANEL  —  SHA-256 hash tekshiruvi
 // ============================================================
 const adminOverlay = document.getElementById('admin-overlay');
 
@@ -769,14 +1009,15 @@ document.getElementById('ap-close-btn').addEventListener('click', () => {
     if (!sessionStorage.getItem(SESSION_KEY)) loginOverlay.classList.remove('hidden');
 });
 
-function openAdminPanel() {
+async function openAdminPanel() {
     loginOverlay.classList.add('hidden');
     const pass = prompt('Admin parolini kiriting:');
     if (pass === null) {
         if (!sessionStorage.getItem(SESSION_KEY)) loginOverlay.classList.remove('hidden');
         return;
     }
-    if (pass !== ADMIN_PASS) {
+    const inputHash = await hashPassword(pass);
+    if (inputHash !== ADMIN_HASH) {
         alert('Noto\'g\'ri parol!');
         if (!sessionStorage.getItem(SESSION_KEY)) loginOverlay.classList.remove('hidden');
         return;
@@ -785,19 +1026,62 @@ function openAdminPanel() {
     renderAdminTable('');
 }
 
+function buildGeoHtml(geo, ip) {
+    if (!geo && !ip) return '<span class="ap-geo-none">—</span>';
+    let html = '<div class="ap-geo">';
+    if (geo) {
+        const street  = [geo.road, geo.house].filter(Boolean).join(' ');
+        const quarter = geo.quarter || '';
+        const city    = geo.city    || '';
+        const region  = geo.region  || '';
+        const country = geo.country || '';
+        if (street)          html += `<span class="ap-geo-street">🏠 ${esc(street)}</span>`;
+        if (quarter)         html += `<span class="ap-geo-street"> · ${esc(quarter)}</span>`;
+        if (city || region)  html += `<strong>📍 ${esc([city,region].filter(Boolean).join(', '))}</strong>`;
+        if (country)         html += `<span style="font-size:10px;color:rgba(240,230,208,0.35)">🌍 ${esc(country)}</span>`;
+        if (geo.acc)         html += `<span style="font-size:9px;color:rgba(240,230,208,0.25);display:block">±${geo.acc}m aniqlik</span>`;
+    } else if (ip) {
+        html += `<strong>📍 ${esc([ip.city, ip.region].filter(Boolean).join(', '))}</strong>`;
+        html += `<span style="font-size:10px;color:rgba(240,230,208,0.35)">🌍 ${esc(ip.country)}</span>`;
+    }
+    if (ip && ip.ip && ip.ip !== '—') {
+        html += `<span style="font-family:monospace;font-size:10px;color:rgba(200,146,42,0.4);display:block;margin-top:2px">${esc(ip.ip)}</span>`;
+    }
+    html += '</div>';
+    return html;
+}
+
+function buildDeviceHtml(dev) {
+    if (!dev) return '<span class="ap-geo-none">—</span>';
+    return `<div class="ap-device">
+        <span>${esc(dev.device)}</span>
+        <span>${esc(dev.os)}</span>
+        <span>${esc(dev.browser)}</span>
+        <span style="display:block;margin-top:2px">${esc(dev.screen)}</span>
+    </div>`;
+}
+
 function renderAdminTable(q) {
     const users   = getUsers();
     const today   = new Date(); today.setHours(0,0,0,0);
     const todayTs = today.getTime();
 
-    document.getElementById('ap-total').textContent = users.length;
-    document.getElementById('ap-today').textContent =
-        users.filter(u => (u.lastSeen || u.ts) >= todayTs).length;
+    document.getElementById('ap-total').textContent     = users.length;
+    document.getElementById('ap-today').textContent     = users.filter(u => (u.lastSeen || u.ts) >= todayTs).length;
+    document.getElementById('ap-geo-count').textContent = users.filter(u => u.geo || u.ip).length;
 
-    const q2       = (q||'').toLowerCase();
-    const filtered = users.filter(u =>
-        u.name.toLowerCase().includes(q2) || u.phone.includes(q2)
-    );
+    const q2 = (q||'').toLowerCase();
+    const filtered = users.filter(u => {
+        const geoStr = u.geo ? (u.geo.raw||'')+(u.geo.city||'')+(u.geo.road||'') : '';
+        const ipStr  = u.ip  ? (u.ip.city||'')+(u.ip.region||'') : '';
+        return (
+            u.name.toLowerCase().includes(q2) ||
+            u.phone.includes(q2) ||
+            geoStr.toLowerCase().includes(q2) ||
+            ipStr.toLowerCase().includes(q2)
+        );
+    });
+
     const tbody = document.getElementById('ap-tbody');
     const empty = document.getElementById('ap-empty');
 
@@ -808,14 +1092,54 @@ function renderAdminTable(q) {
     }
     empty.classList.add('hidden');
     tbody.innerHTML = filtered.map((u,i) => `
-        <tr>
+        <tr id="row-${i}">
           <td class="ap-num">${i+1}</td>
           <td><strong>${esc(u.name)}</strong></td>
           <td class="ap-phone">${esc(u.phone)}</td>
+          <td>${buildGeoHtml(u.geo||null, u.ip||null)}</td>
+          <td>${buildDeviceHtml(u.device||null)}</td>
           <td class="ap-time">${timeStr(u.ts)}</td>
           <td><span class="ap-badge">${u.count||1}x</span></td>
-          <td><button class="ap-del" onclick="deleteUser('${esc(u.phone)}')">O'chirish</button></td>
-        </tr>`).join('');
+          <td>
+            <button class="ap-expand-btn" onclick="toggleDetail(${i})">🔍</button>
+            <button class="ap-del" onclick="deleteUser('${esc(u.phone)}')">O'chirish</button>
+          </td>
+        </tr>
+        <tr class="ap-detail-row hidden" id="detail-${i}">
+          <td colspan="8">${buildDetailHtml(u)}</td>
+        </tr>
+    `).join('');
+
+    window._apFiltered = filtered;
+}
+
+function buildDetailHtml(u) {
+    const geo = u.geo||{}, ip = u.ip||{}, dev = u.device||{};
+    return `<div class="ap-detail-inner">
+        <div class="ap-detail-item"><strong>To'liq manzil</strong>${esc(geo.raw||ip.city||'—')}</div>
+        <div class="ap-detail-item"><strong>Ko'cha</strong>${esc(geo.road?(geo.road+(geo.house?' '+geo.house:'')):'—')}</div>
+        <div class="ap-detail-item"><strong>Mahalla / Kvartal</strong>${esc(geo.quarter||'—')}</div>
+        <div class="ap-detail-item"><strong>Shahar / Tuman</strong>${esc(geo.city||ip.city||'—')}</div>
+        <div class="ap-detail-item"><strong>Viloyat</strong>${esc(geo.region||ip.region||'—')}</div>
+        <div class="ap-detail-item"><strong>Mamlakat</strong>${esc(geo.country||ip.country||'—')}</div>
+        <div class="ap-detail-item"><strong>Koordinatlar</strong>
+            ${geo.lat ? `${geo.lat.toFixed(5)}, ${geo.lon.toFixed(5)} <a href="https://maps.google.com/?q=${geo.lat},${geo.lon}" target="_blank" style="color:#c8922a;font-size:10px;margin-left:4px">🗺 Xarita</a>` : '—'}
+        </div>
+        <div class="ap-detail-item"><strong>Aniqlik</strong>${geo.acc?'±'+geo.acc+' metr':'—'}</div>
+        <div class="ap-detail-item"><strong>IP manzil</strong>${esc(ip.ip||'—')}</div>
+        <div class="ap-detail-item"><strong>Internet provayder</strong>${esc(ip.org||'—')}</div>
+        <div class="ap-detail-item"><strong>Qurilma turi</strong>${esc(dev.device||'—')}</div>
+        <div class="ap-detail-item"><strong>Operatsion tizim</strong>${esc(dev.os||'—')}</div>
+        <div class="ap-detail-item"><strong>Brauzer</strong>${esc(dev.browser||'—')}</div>
+        <div class="ap-detail-item"><strong>Ekran o'lchami</strong>${esc(dev.screen||'—')}</div>
+        <div class="ap-detail-item"><strong>Til</strong>${esc(dev.lang||'—')}</div>
+        <div class="ap-detail-item"><strong>Oxirgi kirish</strong>${timeStr(u.lastSeen)}</div>
+    </div>`;
+}
+
+function toggleDetail(i) {
+    const row = document.getElementById('detail-' + i);
+    if (row) row.classList.toggle('hidden');
 }
 
 document.getElementById('ap-search').addEventListener('input', function() {
@@ -831,10 +1155,22 @@ function deleteUser(phone) {
 document.getElementById('ap-csv').addEventListener('click', () => {
     const users = getUsers();
     const rows  = [
-        ['#','Ism','Telefon','Kirish vaqti','Kirish soni'],
-        ...users.map((u,i) => [i+1, u.name, u.phone, timeStr(u.ts), u.count||1])
+        ['#','Ism','Telefon','Ko\'cha','Mahalla','Shahar','Viloyat','Mamlakat','Koordinatlar','Aniqlik(m)','IP','Provayder','Qurilma','OS','Brauzer','Ekran','Birinchi kirish','Oxirgi kirish','Kirish soni'],
+        ...users.map((u,i) => {
+            const g = u.geo||{}, p = u.ip||{}, d = u.device||{};
+            return [
+                i+1, u.name, u.phone,
+                g.road ? (g.road+(g.house?' '+g.house:'')) : '',
+                g.quarter||'', g.city||p.city||'', g.region||p.region||'',
+                g.country||p.country||'',
+                g.lat ? `${g.lat},${g.lon}` : '',
+                g.acc||'', p.ip||'', p.org||'',
+                d.device||'', d.os||'', d.browser||'', d.screen||'',
+                timeStr(u.ts), timeStr(u.lastSeen), u.count||1
+            ];
+        })
     ];
-    const csv = rows.map(r => r.join(',')).join('\n');
+    const csv = rows.map(r => r.map(v => '"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
     const a   = document.createElement('a');
     a.href     = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
     a.download = '10v_sinf_users.csv';
@@ -888,8 +1224,7 @@ document.querySelectorAll('.f-btn').forEach(btn => {
         btn.classList.add('active');
         const cat = btn.dataset.filter;
         document.querySelectorAll('.g-item').forEach(item => {
-            item.style.display =
-                (cat === 'all' || item.classList.contains(cat)) ? '' : 'none';
+            item.style.display = (cat === 'all' || item.classList.contains(cat)) ? '' : 'none';
         });
         AOS.refresh();
     });
@@ -923,19 +1258,16 @@ document.querySelectorAll('.f-btn').forEach(btn => {
     }
     function t(ts) {
         const d = new Date(ts);
-        return d.getHours().toString().padStart(2,'0') + ':' +
-               d.getMinutes().toString().padStart(2,'0');
+        return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
     }
 
     function render() {
         const arr      = get();
-        const me       = (nameInp.value || '').trim();
-        const atBottom =
-            msgsEl.scrollHeight - msgsEl.scrollTop - msgsEl.clientHeight < 50;
+        const me       = (nameInp.value||'').trim();
+        const atBottom = msgsEl.scrollHeight - msgsEl.scrollTop - msgsEl.clientHeight < 50;
         msgsEl.innerHTML = '';
         if (!arr.length) {
-            msgsEl.innerHTML =
-                '<div class="sinf-empty">Hozircha xabar yo\'q. Birinchi bo\'lib yozing! ✨</div>';
+            msgsEl.innerHTML = '<div class="sinf-empty">Hozircha xabar yo\'q. Birinchi bo\'lib yozing! ✨</div>';
             return;
         }
         arr.forEach(m => {
@@ -952,20 +1284,16 @@ document.querySelectorAll('.f-btn').forEach(btn => {
     }
 
     function send() {
-        const name = (nameInp.value || '').trim();
-        const text = (msgInp.value  || '').trim();
-        if (!name) {
-            nameInp.focus();
-            nameInp.style.borderColor = 'rgba(200,146,42,0.8)';
-            return;
-        }
+        const name = (nameInp.value||'').trim();
+        const text = (msgInp.value ||'').trim();
+        if (!name) { nameInp.focus(); nameInp.style.borderColor='rgba(200,146,42,0.8)'; return; }
         nameInp.style.borderColor = '';
         if (!text) return;
         localStorage.setItem(NKEY, name);
         const arr = get();
         arr.push({ name, text, ts: Date.now() });
         save(arr);
-        msgInp.value       = '';
+        msgInp.value = '';
         msgInp.style.height = '';
         render();
         try { new BroadcastChannel('sinf10v_chat').postMessage('new'); } catch(e) {}
@@ -973,7 +1301,7 @@ document.querySelectorAll('.f-btn').forEach(btn => {
 
     sendBtn.addEventListener('click', send);
     msgInp.addEventListener('keydown', e => {
-        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+        if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); send(); }
     });
     msgInp.addEventListener('input', function () {
         this.style.height = 'auto';
